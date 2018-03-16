@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="img_height">110dip</dimen>
+    <dimen name="img_width">110dip</dimen>
+    <dimen name="actbtn_height">40dip</dimen>
+    <dimen name="actbtn_width">40dip</dimen>
+    <dimen name="bckbtn_height">70dip</dimen>
+    <dimen name="bckbtn_width">70dip</dimen>
+</resources>
