@@ -1,14 +1,18 @@
 package immanuel.co.camerathumb;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -53,6 +57,9 @@ public class CameraIntent extends AppCompatActivity {
         //RelativeLayout.LayoutParams previewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         //mLayout.addView(mPreview, 0, previewLayoutParams);
 
+        if (!checkCameraPermission()){
+            finish();
+        }
         getSupportActionBar().hide();
         GlobalConfig.imgs.clear();
         mLayout = (RelativeLayout) findViewById(R.id.main_layout);
@@ -429,6 +436,16 @@ public class CameraIntent extends AppCompatActivity {
             }
             return true;
         }
+    }
+
+    public boolean checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            //ask for authorisation
+            ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.CAMERA}, 50);
+        else
+            //start your camera
+            return true;
+        return  false;
     }
 
     protected void onResume() {

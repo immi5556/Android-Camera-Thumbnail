@@ -1,11 +1,15 @@
 package immanuel.co.camerathumb;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
@@ -74,6 +78,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
         mLayoutMode = mode;
         mHolder = getHolder();
         mHolder.addCallback(this);
+        releaseCameraAndPreview();
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
             mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
@@ -88,6 +93,17 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            int numberOfCameras = Camera.getNumberOfCameras();
+            for (int i = 0; i < numberOfCameras; i++) {
+                Camera.CameraInfo info = new Camera.CameraInfo();
+                Camera.getCameraInfo(i, info);
+                Log.d("ImmCam", Integer.toString(numberOfCameras));
+                Log.d("ImmCam", Integer.toString(info.facing));
+                Log.d("ImmCam", Integer.toString(Build.VERSION.SDK_INT));
+                if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                    mCameraId = i;
+                }
+            }
             mCamera = Camera.open(mCameraId);
         } else {
             mCamera = Camera.open();
@@ -95,6 +111,14 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
         Camera.Parameters cameraParams = mCamera.getParameters();
         mPreviewSizeList = cameraParams.getSupportedPreviewSizes();
         mPictureSizeList = cameraParams.getSupportedPictureSizes();
+    }
+
+    private void releaseCameraAndPreview() {
+        //mPreview.setCamera(null);
+        if (mCamera != null) {
+            mCamera.release();
+            mCamera = null;
+        }
     }
 
     Camera.ShutterCallback myShutterCallback = new Camera.ShutterCallback(){
@@ -201,7 +225,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     /**
-     * @param cameraParams
      * @param portrait
      * @param reqWidth must be the value of the parameter passed in surfaceChanged
      * @param reqHeight must be the value of the parameter passed in surfaceChanged
