@@ -17,7 +17,7 @@ This is a reusable simple android library which opens camera screen & captures t
 
 ## Installation
 
-gradle: implementation project(':camerathumb')
+gradle: compile 'co.immanuel:camerathumb:0.8'
 
 
 ## API Reference
