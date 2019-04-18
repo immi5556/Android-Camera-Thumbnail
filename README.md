@@ -3,6 +3,7 @@
 This is a reusable simple android library which opens camera screen & captures the images as thumnail in the same screen and then save will send list of images as Bitmap array to the caller.
 
 [![Build Status](https://travis-ci.org/immi5556/Android-Camera-Thumbnail.svg?branch=master)](https://travis-ci.org/immi5556/Android-Camera-Thumbnail)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## This how it works
 
