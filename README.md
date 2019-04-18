@@ -2,6 +2,10 @@
 
 This is a reusable simple android library which opens camera screen & captures the images as thumnail in the same screen and then save will send list of images as Bitmap array to the caller.
 
+## This how it works
+
+![](camera_thumnail_gif_.gif)
+
 ## Code Example
 
 		Intent i = new Intent(ma, CameraIntent.class);
