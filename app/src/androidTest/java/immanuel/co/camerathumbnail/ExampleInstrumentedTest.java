@@ -19,8 +19,8 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        //Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("immanuel.co.camerathumbnail", appContext.getPackageName());
+        //assertEquals("immanuel.co.camerathumbnail", appContext.getPackageName());
     }
 }
