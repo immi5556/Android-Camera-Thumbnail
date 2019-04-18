@@ -1,0 +1,11 @@
+language: android
+android:
+  components:
+    # Uncomment the lines below if you want to
+    # use the latest revision of Android SDK Tools
+    # - tools
+    # - platform-tools
+
+# After a build, send email notification with the build results
+notifications:
+ email: raj@immanuel.co
